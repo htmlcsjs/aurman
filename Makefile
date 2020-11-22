@@ -3,8 +3,8 @@ LDFLAGS =
 
 all: aurman
 
-aurman:
+main:
 	$(CXX) $(CXXFLAGS) -o $@.out $@.cpp $^ $(LDFLAGS)
 
 clean:
-	$(RM) aurman.out
+	$(RM) main.out

@@ -21,7 +21,11 @@ int main(int argc, char const *argv[])
     }
     else if (strcmp(argv[1], "install") == 0 && argc >= 3)
     {
-        std::cout << argv << "\n";
+        const std::string AUR_DICT = "/home/lenny/AUR/";
+        const std::string PACKAGE = argv[2];
+        std::string command = "git clone https://aur.archlinux.org/" + PACKAGE + ".git " + AUR_DICT + PACKAGE;
+        std::system(command.c_str());
+        std::system(("cd" + AUR_DICT + PACKAGE + " && makepkg -si").c_str());
     }
     else if (strcmp(argv[1], "remove") == 0 && argc >= 3)
     {
