@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include "aurman.hpp"
+
+const std::string logfile = "log.log";
 
 void options()
 {
@@ -15,25 +18,24 @@ void options()
 
 int main(int argc, char const *argv[])
 {
+
+    Aurman installer("/home/lenny/AUR/", "log.log", true, "makepkg -si", "git");
+
     if (argc == 1)
     {
         options();
     }
     else if (strcmp(argv[1], "install") == 0 && argc >= 3)
     {
-        const std::string AUR_DICT = "/home/lenny/AUR/";
-        const std::string PACKAGE = argv[2];
-        std::string command = "git clone https://aur.archlinux.org/" + PACKAGE + ".git " + AUR_DICT + PACKAGE;
-        std::system(command.c_str());
-        std::system(("cd" + AUR_DICT + PACKAGE + " && makepkg -si").c_str());
+        installer.install(argv[2]);
     }
     else if (strcmp(argv[1], "remove") == 0 && argc >= 3)
     {
-        std::cout << argv << "\n";
+        installer.remove(argv[2]);
     }
     else if (strcmp(argv[1], "update") == 0 && argc >= 3)
     {
-        std::cout << argv << "\n";
+        installer.update(argv[2]);
     }
     else if (strcmp(argv[1], "add") == 0 && argc >= 3)
     {

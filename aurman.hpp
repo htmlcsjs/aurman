@@ -11,10 +11,10 @@ private:
     bool logging;
     void log(std::string msg);
 public:
-    Aurman(std::string dict, std::string logFile, std::string command, std::string command2, bool toLog);
+    Aurman(const char* dict, const char* logFile, bool toLog, const char* command, const char* command2);
     ~Aurman();
-    int update(std::string package);
-    int remove(std::string package);
-    int install(std::string package);
+    int update(const char* package);
+    int remove(const char* package);
+    int install(const char* package);
 };
 

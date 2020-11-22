@@ -1,7 +1,6 @@
 #include "aurman.hpp"
 
-Aurman::Aurman(std::string dict, std::string logFile, std::string command = "makepkg -si", std::string command2 = "git",
-               bool toLog = false)
+Aurman::Aurman(const char* dict, const char* logFile, bool toLog, const char* command, const char* command2)
 {
     // set all varibles
     version = 0.1;
@@ -14,7 +13,7 @@ Aurman::Aurman(std::string dict, std::string logFile, std::string command = "mak
 }    
 Aurman::~Aurman()
 {
-    log("object gone now");
+    log("object gone now"); // log object deletion
 }
 
 void Aurman::log(std::string msg)
@@ -25,15 +24,20 @@ void Aurman::log(std::string msg)
     }   
 }
 
-int update(std::string package)
+int Aurman::update(const char* package)
 {
     // TODO, create update function
+    return 0;
 }
-int remove(std::string package)
+int Aurman::remove(const char* package)
 {
     // TODO, create remove function
+    return 0;
 }
-int install(std::string package)
+int Aurman::install(const char* package)
 {
-    // TODO, create install function
+    // constructs a command to clone the package
+    std::string command = gitCommand + " clone https://aur.archlinux.org/" + package + ".git " + aurDict + package; 
+    std::system(command.c_str()); // executes the command
+    std::system(("cd " + aurDict + package + " && " + mkpkgCommand).c_str()); // installes the package
 }
