@@ -1,7 +1,7 @@
 CXXFLAGS = -Wall -g
 LDFLAGS = 
 
-all: aurman
+all: main
 
 main:
 	$(CXX) $(CXXFLAGS) -o $@.out $@.cpp $^ $(LDFLAGS)
