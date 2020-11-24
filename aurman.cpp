@@ -11,7 +11,7 @@ Aurman::Aurman(const char* dict, const char* logFilePath, bool toLog, const char
     mkpkgCommand = command;
     gitCommand = command2;
     logging = toLog;
-    if (logging)
+    if (logging == true)
     {
         std::ofstream logFile(logFilePath);
         // open logfile if logging is enabled
@@ -32,7 +32,7 @@ Aurman::~Aurman()
 
 void Aurman::log(std::string msg)
 {
-    if (logging)
+    if (logging == true)
     {
         std::time_t t = std::time(nullptr);
         std::tm tm = *std::localtime(&t);
@@ -40,9 +40,14 @@ void Aurman::log(std::string msg)
     }   
 }
 
-int Aurman::update(const char* package)
+int Aurman::update(const char* charPackage)
 {
-    // TODO, create update function
+    std::string package = charPackage;
+    std::string command = "cd " + aurDict + package + " && " + gitCommand + " pull";
+    // constructs a command to pull the package
+    std::system(command.c_str()); // executes the command
+    std::system(("cd " + aurDict + package + " && " + mkpkgCommand).c_str()); // updates the package
+    log("updated the package: " + package);
     return 0;
 }
 int Aurman::remove(const char* package)
