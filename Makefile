@@ -11,6 +11,9 @@ aurman.o: aurman.cpp
 test:
 	$(CXX) $(CXXFLAGS) -o $@.out $@.cpp $^ $(LDFLAGS)
 
+check: main
+	./main.out install yay
+
 clean:
 	$(RM) main.out
 	$(RM) aurman.o
