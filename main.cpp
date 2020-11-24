@@ -39,11 +39,11 @@ int main(int argc, char const *argv[])
     }
     else if (strcmp(argv[1], "add") == 0 && argc >= 3)
     {
-        std::cout << argv << "\n";
+        std::cout << argv[2] << "\n";
     }
     else if (strcmp(argv[1], "update-all") == 0)
     {
-        std::cout << argv << "\n";
+        std::cout << argv[2] << "\n";
     }
     else
     {

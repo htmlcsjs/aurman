@@ -8,6 +8,10 @@ main: aurman.o
 
 aurman.o: aurman.cpp
 
+test:
+	$(CXX) $(CXXFLAGS) -o $@.out $@.cpp $^ $(LDFLAGS)
+
 clean:
 	$(RM) main.out
 	$(RM) aurman.o
+	$(RM) test.out
