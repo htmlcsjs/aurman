@@ -6,7 +6,7 @@
 Aurman::Aurman(const char* dict, const char* logFilePath, bool toLog, const char* command, const char* command2)
 {
     // set all varibles
-    version = 0.2;
+    version = 1.0;
     aurDict = dict;
     mkpkgCommand = command;
     gitCommand = command2;
@@ -50,9 +50,10 @@ int Aurman::update(const char* charPackage)
     log("updated the package: " + package);
     return 0;
 }
-int Aurman::remove(const char* package)
+int Aurman::remove(const char* charPackage)
 {
-    // TODO, create remove function
+    std::string package = charPackage;
+    std::system(("sudo pacman -R " + package).c_str()); // calles pacman to uninstall the package
     return 0;
 }
 int Aurman::install(const char* charPackage)
