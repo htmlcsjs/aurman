@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <ctime>
 
-Aurman::Aurman(const char* dict, const char* logFilePath, bool toLog, const char* command, const char* command2)
+Aurman::Aurman(const char* dict, const char* logFile, bool toLog, const char* command, const char* command2)
 {
     // set all varibles
     version = 1.0;
@@ -11,11 +11,7 @@ Aurman::Aurman(const char* dict, const char* logFilePath, bool toLog, const char
     mkpkgCommand = command;
     gitCommand = command2;
     logging = toLog;
-    if (logging == true)
-    {
-        std::ofstream logFile(logFilePath);
-        // open logfile if logging is enabled
-    }
+    logFilePath = logFile;
     
     // logging
     log("aurman version " + std::to_string(version));
@@ -27,16 +23,18 @@ Aurman::Aurman(const char* dict, const char* logFilePath, bool toLog, const char
 Aurman::~Aurman()
 {
     log("object gone now"); // log object deletion
-    logFile.close();
 }
 
 void Aurman::log(std::string msg)
 {
     if (logging == true)
     {
+        std::ofstream logFile(logFilePath);
+        // open logfile if logging is enabled
         std::time_t t = std::time(nullptr);
         std::tm tm = *std::localtime(&t);
         logFile << "[" << std::put_time(&tm, "%d/%m/%Y %H:%M:%S") << "]" << msg << "\n";
+        logFile.close();
     }   
 }
 
@@ -50,12 +48,14 @@ int Aurman::update(const char* charPackage)
     log("updated the package: " + package);
     return 0;
 }
+
 int Aurman::remove(const char* charPackage)
 {
     std::string package = charPackage;
     std::system(("sudo pacman -R " + package).c_str()); // calles pacman to uninstall the package
     return 0;
 }
+
 int Aurman::install(const char* charPackage)
 {
     std::string package = charPackage;

@@ -11,6 +11,9 @@ aurman.o: aurman.cpp
 test:
 	$(CXX) $(CXXFLAGS) -o $@.out $@.cpp $^ $(LDFLAGS)
 
+install:
+	cp main.out /usr/local/bin/aurman 
+
 check: main
 	./main.out install yay
 

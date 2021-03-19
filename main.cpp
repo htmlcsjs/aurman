@@ -27,7 +27,11 @@ int main(int argc, char const *argv[])
     }
     else if (strcmp(argv[1], "install") == 0 && argc >= 3)
     {
-        installer.install(argv[2]);
+        for (size_t i = 2; i < argc; i++)
+        {
+            installer.install(argv[i]);
+        }
+        
     }
     else if (strcmp(argv[1], "remove") == 0 && argc >= 3)
     {
